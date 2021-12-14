@@ -63,7 +63,9 @@ namespace WeatherDataSmsService
 
                     string twilioAccountSID = config.GetValue<string>("TwilioAccountSID");
                     string twilioAuthToken = config.GetValue<string>("TwilioAuthToken");
-                    services.AddSingleton<ISmsSenderService>(smsSenderService => new SmsSenderService(twilioAccountSID, twilioAuthToken));
+                    string twilioPhoneNumber = config.GetValue<string>("TwilioPhoneNumber");
+                    string toPhoneNumber = config.GetValue<string>("ToPhoneNumber");
+                    services.AddSingleton<ISmsSenderService>(smsSenderService => new SmsSenderService(twilioAccountSID, twilioAuthToken, twilioPhoneNumber, toPhoneNumber));
 
                     services.AddHostedService<Worker>();
                 });
